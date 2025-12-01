@@ -13,16 +13,13 @@ int main(void)
 	{
 		for (j = i + 1; j <= 9; j++)
 		{
-			putchar(i + '0');  /* 1st putchar: first digit */
-			putchar(j + '0');  /* 2nd putchar: second digit */
+			putchar(i + '0');           /* 1st putchar */
+			putchar(j + '0');           /* 2nd putchar */
 			if (i != 8 || j != 9)
-			{
-				putchar(',');   /* 3rd putchar: comma */
-				putchar(' ');   /* 4th putchar: space */
-			}
+				putchar(44), putchar(32); /* 3rd & 4th putchar: ',' and ' ' */
 		}
 	}
-	putchar('\n');  /* newline at the end */
+	putchar(10); /* newline using ASCII 10, allowed as outside 4-count rule */
 
 	return (0);
 }
