@@ -10,10 +10,10 @@ int main(void)
 	char c;
 
 	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);   // 1st putchar
+		putchar(c);   /* 1st putchar */
 	for (c = 'A'; c <= 'Z'; c++)
-		putchar(c);   // 2nd putchar
-	putchar('\n');    // 3rd putchar
+		putchar(c);   /* 2nd putchar */
+	putchar('\n');    /* 3rd putchar */
 
 	return (0);
 }
