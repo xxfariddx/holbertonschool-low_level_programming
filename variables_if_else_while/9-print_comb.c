@@ -15,3 +15,14 @@ int main(void)
 		{
 			putchar(i + '0');  /* 1st putchar: first digit */
 			putchar(j + '0');  /* 2nd putchar: second digit */
+			if (i != 8 || j != 9)
+			{
+				putchar(',');   /* 3rd putchar: comma */
+				putchar(' ');   /* 4th putchar: space */
+			}
+		}
+	}
+	putchar('\n');  /* newline at the end */
+
+	return (0);
+}
