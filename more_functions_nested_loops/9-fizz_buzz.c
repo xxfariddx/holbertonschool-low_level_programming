@@ -40,9 +40,9 @@ void fizz_buzz(void)
 		}
 		else
 		{
-			/* print the number manually */
-			int n = i, d, rev = 0;
+			int n = i, rev = 0, d;
 
+			/* reverse the number to print digits in correct order */
 			while (n > 0)
 			{
 				rev = rev * 10 + (n % 10);
