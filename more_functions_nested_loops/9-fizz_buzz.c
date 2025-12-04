@@ -33,7 +33,6 @@ void print_number(int n)
  * of 3 with Fizz, multiples of 5 with Buzz, and multiples of
  * both with FizzBuzz, using _putchar only.
  */
-void fizz_buzz(void)
 {
     int i;
 
