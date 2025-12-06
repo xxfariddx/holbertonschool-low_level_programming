@@ -23,6 +23,7 @@ int main(void)
 		if (i != 100)
 			printf(" "); /* space after each element except the last */
 	}
+
 	printf("\n");
 
 	return (0);
