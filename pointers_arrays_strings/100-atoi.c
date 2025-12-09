@@ -16,19 +16,19 @@ int _atoi(char *s)
 		if (s[i] == '-')
 			sign *= -1;
 		else if (s[i] == '+')
-			; /* do nothing for '+' */
+			; /* do nothing */
 		else if (s[i] >= '0' && s[i] <= '9')
 		{
 			started = 1;
 			result = result * 10 + (s[i] - '0');
 		}
 		else if (started)
-			break; /* stop after number ends */
+			break;
 
 		i++;
 	}
 
 	if (sign == -1)
-		return (-(int)result);
+		return (0 - (int)result); /* safer than -(int)result */
 	return ((int)result);
 }
