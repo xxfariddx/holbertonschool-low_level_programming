@@ -6,16 +6,18 @@
  */
 void puts2(char *str)
 {
-	int i = 0;
+	int i, len = 0;
 
-	if (!str)  /* safeguard against NULL */
+	if (!str)
 		return;
 
-	while (str[i])
-	{
+	/* Find length of string */
+	while (str[len] != '\0')
+		len++;
+
+	/* Print every other character */
+	for (i = 0; i < len; i += 2)
 		_putchar(str[i]);
-		i += 2;
-	}
 
 	_putchar('\n');
 }
