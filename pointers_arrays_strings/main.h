@@ -1,7 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-void print_array(int *a, int n);
-int _putchar(char s);
+char *_strcpy(char *dest, char *src);
 
 #endif
