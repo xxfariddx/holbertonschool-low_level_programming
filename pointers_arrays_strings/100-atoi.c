@@ -16,7 +16,7 @@ int _atoi(char *s)
 		if (s[i] == '-')
 			sign *= -1;
 		else if (s[i] == '+')
-			; /* do nothing */
+			; /* ignore */
 		else if (s[i] >= '0' && s[i] <= '9')
 		{
 			started = 1;
@@ -29,6 +29,6 @@ int _atoi(char *s)
 	}
 
 	if (sign == -1)
-		return (0 - (int)result); /* safer than -(int)result */
+		return (0u - result); /* subtract from 0 as unsigned to avoid overflow */
 	return ((int)result);
 }
