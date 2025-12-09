@@ -6,15 +6,15 @@
  */
 void print_rev(char *s)
 {
-    int len = 0;
+	int len = 0;
 
-    /* Find the length of the string */
-    while (s[len] != '\0')
-        len++;
+	/* Find the length of the string */
+	while (s[len] != '\0')
+		len++;
 
-    /* Print the string backwards */
-    for (len = len - 1; len >= 0; len--)
-        _putchar(s[len]);
+	/* Print the string backwards */
+	for (len = len - 1; len >= 0; len--)
+		_putchar(s[len]);
 
-    _putchar('\n');
+	_putchar('\n');
 }
