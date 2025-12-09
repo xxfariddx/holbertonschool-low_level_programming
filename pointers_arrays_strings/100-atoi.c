@@ -4,12 +4,12 @@
  * _atoi - converts a string to an integer
  * @s: string to convert
  *
- * Return: the integer value
+ * Return: integer value
  */
 int _atoi(char *s)
 {
-	int i = 0, sign = 1, result = 0;
-	int started = 0;
+	int i = 0, sign = 1, started = 0;
+	unsigned int result = 0;
 
 	while (s[i] != '\0')
 	{
@@ -17,7 +17,7 @@ int _atoi(char *s)
 			sign *= -1;
 		else if (s[i] == '+')
 		{
-			/* do nothing, sign remains unchanged */
+			/* do nothing */
 		}
 		else if (s[i] >= '0' && s[i] <= '9')
 		{
@@ -25,10 +25,12 @@ int _atoi(char *s)
 			result = result * 10 + (s[i] - '0');
 		}
 		else if (started)
-			break; /* stop once digits have ended */
+			break;
 
 		i++;
 	}
 
-	return (result * sign);
+	if (sign == -1)
+		return (-(int)result);
+	return ((int)result);
 }
