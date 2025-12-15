@@ -2,6 +2,6 @@
 #define MAIN_H
 
 int _putchar(char c);
-int _strlen_recursion(char *s);
+int _sqrt_recursion(int n);
 
 #endif
