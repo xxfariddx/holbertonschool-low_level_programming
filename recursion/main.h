@@ -2,6 +2,6 @@
 #define MAIN_H
 
 int _putchar(char c);
-int is_prime_number(int n);
+void _puts(char *s);
 
 #endif
