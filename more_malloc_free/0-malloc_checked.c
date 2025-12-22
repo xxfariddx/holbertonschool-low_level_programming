@@ -1,14 +1,14 @@
 #include <stdlib.h>
-#include "main.h"
+#include "fake_malloc.h"
 
 /**
- * _malloc_checked - allocates memory using malloc
+ * malloc_checked - allocates memory using malloc
  * @b: number of bytes to allocate
  *
- * Return: pointer to the allocated memory
- *         exits with status 98 if malloc fails
+ * Return: pointer to allocated memory
+ *         exit with status 98 if malloc fails
  */
-void *_malloc_checked(unsigned int b)
+void *malloc_checked(unsigned int b)
 {
     void *ptr;
 
