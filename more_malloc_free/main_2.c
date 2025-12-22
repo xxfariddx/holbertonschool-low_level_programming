@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {
@@ -10,10 +11,4 @@ int main(void)
 
     /* Test üçün mesaj */
     if (c != NULL)
-        printf("Memory allocated successfully!\n");
-
-    /* Yaddaşı azad edirik */
-    free(c);
-
-    return (0);
-}
+        printf("Memory allocated successfull
