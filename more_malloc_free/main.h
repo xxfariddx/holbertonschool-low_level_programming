@@ -3,6 +3,6 @@
 
 #include <stdlib.h>
 
-void *_malloc_checked(unsigned int b);
+void *malloc_checked(unsigned int b);
 
 #endif /* MAIN_H */
