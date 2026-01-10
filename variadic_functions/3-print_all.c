@@ -1,82 +1,56 @@
-#include "variadic_functions.h"
-#include <stdarg.h>
 #include <stdio.h>
-
-/* Helper function prototypes */
-void print_char(va_list args);
-void print_int(va_list args);
-void print_float(va_list args);
-void print_string(va_list args);
+#include <stdarg.h>
 
 /**
- * print_all - prints anything
- * @format: list of argument types
+ * struct printer - Struct to map format tokens to functions
+ * @symbol: The format character (c, i, f, s)
+ * @print: Pointer to the function that prints that type
  */
+typedef struct printer
+{
+    char *symbol;
+    void (*print)(va_list arg);
+} printer_t;
+
+void p_char(va_list arg) { printf("%c", va_arg(arg, int)); }
+void p_int(va_list arg) { printf("%d", va_arg(arg, int)); }
+void p_float(va_list arg) { printf("%f", va_arg(arg, double)); }
+void p_string(va_list arg)
+{
+    char *s = va_arg(arg, char *);
+    if (!s)
+        s = "(nil)";
+    printf("%s", s);
+}
+
 void print_all(const char * const format, ...)
 {
-	va_list args;
-	unsigned int i = 0, j;
-	char *sep = "";
+    va_list args;
+    printer_t funcs[] = {
+        {"c", p_char},
+        {"i", p_int},
+        {"f", p_float},
+        {"s", p_string}
+    };
+    int i = 0, j;
+    char *sep = "";
 
-	typedef struct printer
-	{
-		char c;
-		void (*f)(va_list);
-	} printer_t;
-
-	printer_t p[] = {
-		{'c', print_char},
-		{'i', print_int},
-		{'f', print_float},
-		{'s', print_string},
-		{'\0', NULL}
-	};
-
-	va_start(args, format);
-
-	while (format && format[i])
-	{
-		j = 0;
-		while (p[j].c)
-		{
-			while (format[i] == p[j].c)
-			{
-				printf("%s", sep);
-				sep = ", ";
-				p[j].f(args);
-				break;
-			}
-			j++;
-		}
-		i++;
-	}
-
-	va_end(args);
-	printf("\n");
-}
-
-/* Helper functions */
-
-void print_char(va_list args)
-{
-	printf("%c", va_arg(args, int));
-}
-
-void print_int(va_list args)
-{
-	printf("%d", va_arg(args, int));
-}
-
-void print_float(va_list args)
-{
-	printf("%f", va_arg(args, double));
-}
-
-void print_string(va_list args)
-{
-	char *str = va_arg(args, char *);
-
-	if (str == NULL)
-		str = "(nil)";
-	printf("%s", str);
+    va_start(args, format);
+    while (format && format[i])
+    {
+        j = 0;
+        while (j < 4)
+        {
+            if (format[i] == *(funcs[j].symbol))
+            {
+                printf("%s", sep);
+                funcs[j].print(args);
+                sep = ", ";
+            }
+            j++;
+        }
+        i++;
+    }
+    printf("\n");
+    va_end(args);
 }
