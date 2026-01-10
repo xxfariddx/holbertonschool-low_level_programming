@@ -1,46 +1,23 @@
-#include "variadic_functions.h"
-#include <stdarg.h>
-#include <stdio.h>
-
-/**
- * print_all - prints anything
- * @format: list of argument types
- */
-void print_all(const char * const format, ...)
+void print_char(va_list args)
 {
-	va_list args;
-	unsigned int i = 0;
-	char *sep = "";
-	char *str;
+	printf("%c", va_arg(args, int));
+}
 
-	va_start(args, format);
+void print_int(va_list args)
+{
+	printf("%d", va_arg(args, int));
+}
 
-	while (format && format[i])
-	{
-		while (format[i] == 'c' || format[i] == 'i'
-		       || format[i] == 'f' || format[i] == 's')
-		{
-			printf("%s", sep);
-			sep = ", ";
+void print_float(va_list args)
+{
+	printf("%f", va_arg(args, double));
+}
 
-			if (format[i] == 'c')
-				printf("%c", va_arg(args, int));
-			if (format[i] == 'i')
-				printf("%d", va_arg(args, int));
-			if (format[i] == 'f')
-				printf("%f", va_arg(args, double));
-			if (format[i] == 's')
-			{
-				str = va_arg(args, char *);
-				if (str == NULL)
-					str = "(nil)";
-				printf("%s", str);
-			}
-			break;
-		}
-		i++;
-	}
+void print_string(va_list args)
+{
+	char *str = va_arg(args, char *);
 
-	va_end(args);
-	printf("\n");
+	if (str == NULL)
+		str = "(nil)";
+	printf("%s", str);
 }
