@@ -10,8 +10,8 @@
  * Return: address of new node, or NULL if it fails
  */
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h,
-                                     unsigned int idx,
-                                     int n)
+									 unsigned int idx,
+									 int n)
 {
 	dlistint_t *new, *temp;
 	unsigned int i;
@@ -19,7 +19,7 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h,
 	if (h == NULL)
 		return (NULL);
 
-	/* If adding at the beginning, use add_dnodeint */
+	/* If adding at the beginning, reuse add_dnodeint */
 	if (idx == 0)
 		return (add_dnodeint(h, n));
 
@@ -27,22 +27,22 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h,
 	for (i = 0; i < idx - 1 && temp != NULL; i++)
 		temp = temp->next;
 
-	/* If temp is NULL, index is out of bounds */
+	/* If index is out of bounds */
 	if (temp == NULL)
 		return (NULL);
 
-	/* If adding at the end, use add_dnodeint_end */
+	/* If adding at the end, reuse add_dnodeint_end */
 	if (temp->next == NULL)
 		return (add_dnodeint_end(h, n));
 
-	/* Create the new node */
+	/* Create new node */
 	new = malloc(sizeof(dlistint_t));
 	if (new == NULL)
 		return (NULL);
 
 	new->n = n;
 
-	/* Insert new node between temp and temp->next */
+	/* Insert node between temp and temp->next */
 	new->next = temp->next;
 	new->prev = temp;
 	temp->next->prev = new;
