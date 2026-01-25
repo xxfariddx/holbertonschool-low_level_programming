@@ -2,35 +2,44 @@
 #include <string.h>
 
 /**
- * create_node - Creates a new hash node
- * @key: Key string
- * @value: Value string
+ * hash_table_set - Adds or updates an element in the hash table
+ * @ht: Hash table
+ * @key: Key (cannot be empty)
+ * @value: Value (will be duplicated)
  *
- * Return: Pointer to new node, or NULL if failed
+ * Return: 1 if success, 0 otherwise
  */
-hash_node_t *create_node(const char *key, const char *value)
+int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *node;
+	unsigned long int index;
+	hash_node_t *current, *new_node;
 
-	node = malloc(sizeof(hash_node_t));
-	if (!node)
-		return (NULL);
+	if (!ht || !key || *key == '\0' || !value)
+		return (0);
 
-	node->key = strdup(key);
-	if (!node->key)
+	index = key_index((const unsigned char *)key, ht->size);
+	current = ht->array[index];
+
+	/* Check if key exists, update value */
+	while (current)
 	{
-		free(node);
-		return (NULL);
+		if (strcmp(current->key, key) == 0)
+		{
+			free(current->value);
+			current->value = strdup(value);
+			return (current->value ? 1 : 0);
+		}
+		current = current->next;
 	}
 
-	node->value = strdup(value);
-	if (!node->value)
-	{
-		free(node->key);
-		free(node);
-		return (NULL);
-	}
+	/* Key does not exist, create new node */
+	new_node = create_node(key, value);
+	if (!new_node)
+		return (0);
 
-	node->next = NULL;
-	return (node);
+	/* Insert at beginning for collision handling */
+	new_node->next = ht->array[index];
+	ht->array[index] = new_node;
+
+	return (1);
 }
