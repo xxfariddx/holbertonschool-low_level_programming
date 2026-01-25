@@ -31,7 +31,8 @@ int update_value(hash_node_t *node, const char *value)
  *
  * Return: 1 if success, 0 otherwise
  */
-int add_node(hash_table_t *ht, unsigned long int index, const char *key, const char *value)
+int add_node(hash_table_t *ht, unsigned long int index, const char *key,
+		const char *value)
 {
 	hash_node_t *new_node;
 
@@ -60,7 +61,7 @@ int add_node(hash_table_t *ht, unsigned long int index, const char *key, const c
 }
 
 /**
- * hash_table_set - Adds or updates an element in the hash table
+ * hash_table_set - Adds or updates an element in a hash table
  * @ht: Hash table
  * @key: Key (cannot be empty)
  * @value: Value (will be duplicated)
@@ -81,9 +82,13 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	while (current)
 	{
 		if (strcmp(current->key, key) == 0)
-			return (update_value(current, value));
+			return (
+				update_value(current, value)
+			);
 		current = current->next;
 	}
 
-	return (add_node(ht, index, key, value));
+	return (
+		add_node(ht, index, key, value)
+	);
 }
